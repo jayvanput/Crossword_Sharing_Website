@@ -26,26 +26,21 @@ header h1 {
 #content {
     display:grid;
     grid-template-columns: 1fr;
+
 }
 
 aside {
     display: none;
 }
-#container {
-    margin: 0 auto;
-    width:100%;
+
+#main_board {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 }
 
-.puz {
+#new_puzzle {
+    height:40vh;
     background-color: white;
-    border: 1px solid gray;
-    border-radius: 5px;
-    margin:1%;
-    height: 20vh;
-}
-
-.puz:hover {
-    background-color: rgb(186, 206, 245);
 }
 
 @media (min-device-width:480px) {
