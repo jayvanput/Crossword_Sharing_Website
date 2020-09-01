@@ -1,10 +1,9 @@
 const express = require('express');
 const app = express();
-const router = require('./Routes/router');
 const morgan = require('morgan');
-const sqlite = require('sqlite3');
 
-const db = new sqlite.Database('./db.sqlite');
+const db = require("./database.js")
+
 // Routes and middleware
 app.use(morgan('tiny'));
 
@@ -16,6 +15,7 @@ app.get('/puzzles', (req, res, next) => {
       console.log('error boii')
       res.status(400).send()
     }
+    console.log(rows)
     res.json({
       "data": rows
     })
