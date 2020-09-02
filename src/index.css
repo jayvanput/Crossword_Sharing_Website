@@ -23,7 +23,7 @@ header h1 {
 
 /** Body of the html file. **/
 
-#content {
+#puzzle_master {
     display:grid;
     grid-template-columns: 1fr;
 
@@ -39,7 +39,7 @@ aside {
 }
 
 @media (min-device-width:480px) {
-    #content {
+    #puzzle_master {
         display:grid;
         grid-template-columns: 1fr 2fr 1fr;
     }
@@ -52,13 +52,6 @@ aside {
         height: 50vh;
         margin: 1% 10%;
     }
-
-    .puz {
-        display:flex;
-        background-color: white;
-        border: 1px solid gray;
-        height: 20vh;
-      }
       
       .puz div {
         flex: 1;

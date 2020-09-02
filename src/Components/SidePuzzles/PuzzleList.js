@@ -1,6 +1,6 @@
 import React from 'react';
 import './PuzzleList.css';
-import PuzzleItem from '../PuzzleItem/PuzzleItem'
+import PuzzleItem from './PuzzleItem'
 
 class PuzzleList extends React.Component {
   constructor(props) {
@@ -25,8 +25,10 @@ class PuzzleList extends React.Component {
   render() {
     const { puzzles } = this.state;
     return (
-      <div className="container">
-        {puzzles.map((puzzle, index) => <PuzzleItem puzzle={puzzle} key={index + 1} />)}
+      <div id="puzzles">
+        <div className="container">
+          {puzzles.map((puzzle, index) => <PuzzleItem puzzle={puzzle} key={index + 1} />)}
+        </div>
       </div>
     );
   }

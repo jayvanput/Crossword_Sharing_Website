@@ -1,7 +1,7 @@
 .puz {
   display:flex;
   background-color: white;
-  border: 1px solid gray;
+  border-bottom: 1px solid gray;
   height: 20vh;
 }
 
