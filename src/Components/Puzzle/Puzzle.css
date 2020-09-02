@@ -1,24 +1,26 @@
-.puz {
+#puzzle {
   display:flex;
+}
+table {
   background-color: white;
-  border: 1px solid gray;
-  border-radius: 10px;
-  margin: 1%;
-  height: 20vh;
+  width:30vw;
+  height:30vw;
 }
 
-.puz div {
-  flex: 1;
+#puzzle div {
+  width:10vw;
+  background-color: white;
+  border: 1px solid black;
+}
+table, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td {
+  vertical-align: bottom;
+  padding-bottom: 0;
+  display: table-cell;
   text-align: center;
-  margin:auto;
-}
-
-.puz span {
-  font-size: 10vh;
-  margin:auto;
-  box-sizing: border-box;
-}
-
-.puz:hover {
-  background-color: rgb(186, 206, 245);
+  font-size: 1.4vw;
 }

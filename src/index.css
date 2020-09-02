@@ -3,8 +3,8 @@
 }
 
 body {
-    background-color: hsl(219, 93%, 64%);
     margin: 0;
+    background-color: hsl(219, 93%, 64%);
 }
 
 header {
@@ -33,14 +33,9 @@ aside {
     display: none;
 }
 
-#main_board {
+#puzzle {
     border-left: 1px solid black;
     border-right: 1px solid black;
-}
-
-#new_puzzle {
-    height:40vh;
-    background-color: white;
 }
 
 @media (min-device-width:480px) {
@@ -59,6 +54,25 @@ aside {
     }
 
     .puz {
-        height: 10vh;
-    }
+        display:flex;
+        background-color: white;
+        border: 1px solid gray;
+        height: 20vh;
+      }
+      
+      .puz div {
+        flex: 1;
+        text-align: center;
+        margin:auto;
+      }
+      
+      .puz span {
+        font-size: 5vh;
+        margin:auto;
+        box-sizing: border-box;
+      }
+      
+      .puz:hover {
+        background-color: rgb(186, 206, 245);
+      }
 }

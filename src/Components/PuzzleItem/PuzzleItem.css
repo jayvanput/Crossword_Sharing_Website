@@ -1,0 +1,22 @@
+.puz {
+  display:flex;
+  background-color: white;
+  border: 1px solid gray;
+  height: 20vh;
+}
+
+.puz div {
+  flex: 1;
+  text-align: center;
+  margin:auto;
+}
+
+.puz span {
+  font-size: 5vh;
+  margin:auto;
+  box-sizing: border-box;
+}
+
+.puz:hover {
+  background-color: rgb(186, 206, 245);
+}

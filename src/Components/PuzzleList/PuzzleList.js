@@ -1,8 +1,8 @@
 import React from 'react';
-import './App.css';
-import Puzzle from '../Puzzle/Puzzle'
+import './PuzzleList.css';
+import PuzzleItem from '../PuzzleItem/PuzzleItem'
 
-class App extends React.Component {
+class PuzzleList extends React.Component {
   constructor(props) {
     super(props);
 
@@ -26,11 +26,11 @@ class App extends React.Component {
     const { puzzles } = this.state;
     return (
       <div className="container">
-        {puzzles.map(puzzle => <Puzzle puzzle={puzzle} />)}
+        {puzzles.map((puzzle, index) => <PuzzleItem puzzle={puzzle} key={index + 1} />)}
       </div>
     );
   }
 
 }
 
-export default App;
+export default PuzzleList;
