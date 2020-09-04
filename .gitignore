@@ -12,6 +12,7 @@
 /build
 
 # misc
+db.sqbpro
 .DS_Store
 .env.local
 .env.development.local
