@@ -1,14 +1,17 @@
 #puzzle {
   display:flex;
+  justify-content: end;
 }
 table {
   background-color: white;
   width:30vw;
   height:30vw;
 }
-
-#puzzle div {
-  width:10vw;
+.clueList {
+  display:flex;
+  justify-content: end;
+}
+#puzzle > div {
   background-color: white;
   border: 1px solid black;
 }

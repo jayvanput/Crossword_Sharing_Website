@@ -21,3 +21,7 @@ td input{
   font-size: 1.4vw;
   text-transform:uppercase;
 }
+
+.black > input{
+  background-color: black;
+}

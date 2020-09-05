@@ -22,23 +22,33 @@ app.get('/puzzles/', (req, res, next) => {
   })
 })
 
-app.get('/puzzles/:id', (req, res, next) => {
-  let clues = [];
-  let squares = [];
-  db.serialize(() => {
-    db.each(`SELECT * FROM clue WHERE puzzleID = ${req.params.id};`, (error, row) => {
-      clues.push(row);
-    })
-    db.each(`SELECT * FROM square WHERE puzzleID = ${req.params.id};`, (error, row) => {
-      squares.push(row);
-    }, function () {
-      res.json({
-        "clues": clues,
-        "squares": squares
-      })
-    })
+app.get('/puzzles/:id/puzzle', (req, res, next) => {
+  let puzzle = [];
+  db.each(`SELECT * FROM puzzle WHERE ID = ${req.params.id};`, (error, row) => {
+    puzzle.push(row);
+  }, function () {
+    res.json(puzzle)
   })
 })
+
+app.get('/puzzles/:id/squares', (req, res, next) => {
+  let squares = [];
+  db.each(`SELECT * FROM square WHERE puzzleID = ${req.params.id};`, (error, row) => {
+    squares.push(row);
+  }, function () {
+    res.json(squares)
+  })
+})
+
+app.get('/puzzles/:id/clues', (req, res, next) => {
+  let clues = [];
+  db.each(`SELECT * FROM clue WHERE puzzleID = ${req.params.id};`, (error, row) => {
+    clues.push(row);
+  }, function () {
+    res.json(clues)
+  })
+})
+app.use('*', express.static('build'));
 
 app.listen(4000, () => {
   console.log('doing the big boy things on port 3000!')

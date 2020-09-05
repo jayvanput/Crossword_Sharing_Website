@@ -1,9 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
 import './index.css';
-import PuzzleList from './Components/SidePuzzles/PuzzleList';
 import Puzzle from './Components/MainPuzzle/Puzzle';
-import PuzzleItem from './Components/SidePuzzles/PuzzleItem';
+import PuzzleItem from './Components/PuzzleLinks/PuzzleItem';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -40,12 +39,12 @@ export default class App extends React.Component {
               <h1>About Me:</h1>
               <p>My name is Jay VanPut.</p>
             </aside>
-            <Route path={'/puz/:id'} render={({ match }) => (
-              <div id="puzzles">
-                <Puzzle id={match.params.id} puzzle={puzzles[match.params.id - 1]} />
-              </div>
-            )} />
             <div id="puzzles">
+              <Route path={'/puz/:id'} render={({ match }) => (
+                <Puzzle id={match.params.id} />
+              )} />
+            </div>
+            <div id="puzzle_links">
               <div className="container">
                 {puzzles.map((puzzle, index) =>
                   <Link to={`/puz/${index + 1}`} key={index + 1}>
