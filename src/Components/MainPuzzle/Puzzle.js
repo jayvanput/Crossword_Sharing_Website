@@ -1,21 +1,57 @@
 import React from 'react';
 import './Puzzle.css'
-import Square from './Square'
+import PuzzleRow from './PuzzleRow'
 
 class Puzzle extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      clues: [],
+      squares: []
+    }
+  }
+
+  componentDidMount() {
+    fetch(`http://localhost:4000/puzzles/${this.props.id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          squares: response.squares,
+        })
+      })
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.id !== this.props.id) {
+      fetch(`http://localhost:4000/puzzles/${this.props.id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(response => {
+
+          this.setState({
+            squares: response.squares,
+          })
+        })
+    }
+  }
 
   render() {
-
-    const squares = [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [6, 7, 8, 9, 10], [6, 7, 8, 9, 10], [6, 7, 8, 9, 10]]
+    const { squares } = this.state
     return (
       <div id="puzzle">
         <table>
           <tbody>
-            {squares.map(row =>
-              <tr>
-                {row.map((square, index) => <Square number={square} font_val={squares.length} />)}
-              </tr>)
-            }
+            {[...Array(Math.sqrt(squares.length))].map((row, index) => (
+              <PuzzleRow row_size={Math.sqrt(squares.length)} squares={squares} id={index} key={index}></PuzzleRow>
+            ))}
           </tbody>
         </table>
       </div>

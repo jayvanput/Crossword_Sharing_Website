@@ -10,18 +10,34 @@ app.use(cors());
 app.use('/', express.static('build'));
 
 app.get('/puzzles/', (req, res, next) => {
-  db.all('SELECT * FROM puzzle;', (error, rows) => {
-    if (error) {
-      res.status(400).send()
-    }
-    res.json({
-      "data": rows
+  let puzzles = [];
+  db.serialize(() => {
+    db.each('SELECT * FROM puzzle;', (error, row) => {
+      puzzles.push(row)
+    }, function () {
+      res.json({
+        "puzzles": puzzles,
+      })
     })
   })
 })
 
 app.get('/puzzles/:id', (req, res, next) => {
-  res.send(req.params.id)
+  let clues = [];
+  let squares = [];
+  db.serialize(() => {
+    db.each(`SELECT * FROM clue WHERE puzzleID = ${req.params.id};`, (error, row) => {
+      clues.push(row);
+    })
+    db.each(`SELECT * FROM square WHERE puzzleID = ${req.params.id};`, (error, row) => {
+      squares.push(row);
+    }, function () {
+      res.json({
+        "clues": clues,
+        "squares": squares
+      })
+    })
+  })
 })
 
 app.listen(4000, () => {

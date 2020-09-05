@@ -1,7 +1,9 @@
 import React from 'react';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
 import './index.css';
 import PuzzleList from './Components/SidePuzzles/PuzzleList';
 import Puzzle from './Components/MainPuzzle/Puzzle';
+import PuzzleItem from './Components/SidePuzzles/PuzzleItem';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -12,14 +14,16 @@ export default class App extends React.Component {
     }
   }
   componentDidMount() {
-    fetch(`/puzzles`, {
+    fetch(`http://localhost:4000/puzzles`, {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
     })
       .then(response => response.json())
-      .then(response => this.setState({ puzzles: response.data }))
+      .then(response => this.setState({
+        puzzles: response.puzzles
+      }))
   }
 
   render() {
@@ -29,13 +33,27 @@ export default class App extends React.Component {
         <header>
           <h1>JVCrosswords</h1>
         </header>
+        <div></div>
         <div id="puzzle_master" >
-          <aside>
-            <h1>About Me:</h1>
-            <p>My name is Jay VanPut.</p>
-          </aside>
-          <Puzzle />
-          <PuzzleList puzzles={puzzles} />
+          <Router>
+            <aside>
+              <h1>About Me:</h1>
+              <p>My name is Jay VanPut.</p>
+            </aside>
+            <Route path={'/puz/:id'} render={({ match }) => (
+              <div id="puzzles">
+                <Puzzle id={match.params.id} puzzle={puzzles[match.params.id - 1]} />
+              </div>
+            )} />
+            <div id="puzzles">
+              <div className="container">
+                {puzzles.map((puzzle, index) =>
+                  <Link to={`/puz/${index + 1}`} key={index + 1}>
+                    <PuzzleItem puzzle={puzzle} key={index + 1} />
+                  </Link>)}
+              </div>
+            </div>
+          </Router>
         </div>
       </div >
     )
