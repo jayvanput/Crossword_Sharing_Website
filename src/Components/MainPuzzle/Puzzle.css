@@ -1,16 +1,22 @@
 #puzzle {
   display:flex;
-  justify-content: end;
+  justify-content: space-evenly;
 }
 table {
   background-color: white;
-  width:30vw;
-  height:30vw;
+  width: 30vw;
+  height: 30vw;
 }
-.clueList {
-  display:flex;
-  justify-content: end;
+.clueList{
+  display:grid;
+  grid-template-rows: 1fr 1fr;
+  width: 15vw;
 }
+
+.clueList  {
+  overflow-y: scroll;
+}
+
 #puzzle > div {
   background-color: white;
   border: 1px solid black;

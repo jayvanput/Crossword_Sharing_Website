@@ -33,17 +33,16 @@ aside {
     display: none;
 }
 
-#puzzle {
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-}
-
 @media (min-device-width:480px) {
     #puzzle_master {
         display:grid;
         grid-template-columns: 1fr 2fr 1fr;
     }
     
+    #puzzle_links {
+        display: block;
+    }
+
     aside {
         display:block;
         background-color: white;

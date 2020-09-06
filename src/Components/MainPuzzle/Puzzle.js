@@ -36,7 +36,6 @@ class Puzzle extends React.Component {
       ])
         .then(([response1, response2]) => Promise.all([response1.json(), response2.json()]))
         .then(([response1, response2]) => {
-
           this.setState({
             squares: response1,
             clues: response2
