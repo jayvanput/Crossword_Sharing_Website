@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './Clues.css'
 class Clues extends React.Component {
 
   render() {

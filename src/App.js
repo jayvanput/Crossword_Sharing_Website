@@ -35,15 +35,7 @@ export default class App extends React.Component {
         <div></div>
         <div id="puzzle_master" >
           <Router>
-            <aside>
-              <h1>About Me:</h1>
-              <p>My name is Jay VanPut.</p>
-            </aside>
-            <div id="puzzles">
-              <Route path={'/puz/:id'} render={({ match }) => (
-                <Puzzle id={match.params.id} />
-              )} />
-            </div>
+
             <div id="puzzle_links">
               <div className="container">
                 {puzzles.map((puzzle, index) =>
@@ -52,6 +44,15 @@ export default class App extends React.Component {
                   </Link>)}
               </div>
             </div>
+            <div id="puzzles">
+              <Route path={'/puz/:id'} render={({ match }) => (
+                <Puzzle id={match.params.id} />
+              )} />
+            </div>
+            <aside>
+              <h1>About Me:</h1>
+              <p>My name is Jay VanPut.</p>
+            </aside>
           </Router>
         </div>
       </div >

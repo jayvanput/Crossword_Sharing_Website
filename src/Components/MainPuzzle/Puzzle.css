@@ -2,34 +2,16 @@
   display:flex;
   justify-content: space-evenly;
 }
-table {
-  background-color: white;
-  width: 30vw;
-  height: 30vw;
-}
-.clueList{
-  display:grid;
-  grid-template-rows: 1fr 1fr;
-  width: 15vw;
-}
-
-.clueList  {
-  overflow-y: scroll;
-}
 
 #puzzle > div {
   background-color: white;
   border: 1px solid black;
 }
-table, td {
+
+table {
+  background-color: white;
+  width: 30vw;
+  height: 30vw;
   border: 1px solid black;
   border-collapse: collapse;
-}
-
-td {
-  vertical-align: bottom;
-  padding-bottom: 0;
-  display: table-cell;
-  text-align: center;
-  font-size: 1.4vw;
 }
