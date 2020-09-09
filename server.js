@@ -51,5 +51,5 @@ app.get('/puzzles/:id/clues', (req, res, next) => {
 app.use('*', express.static('build'));
 
 app.listen(4000, () => {
-  console.log('doing the big boy things on port 3000!')
+  console.log('doing the big boy things on port 4000!')
 })
