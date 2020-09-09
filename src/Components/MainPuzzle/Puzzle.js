@@ -12,7 +12,8 @@ class Puzzle extends React.Component {
       clues: [],
       row_tab: true,
       col_tab_order: [],
-      orig_tab_order: []
+      orig_tab_order: [],
+      size: 0
     }
     this.changeFocus = this.FocusNext.bind(this)
     this.get_col_tab = this.get_col_tab.bind(this)
@@ -36,7 +37,7 @@ class Puzzle extends React.Component {
           squares,
           clues,
           col_tab_order,
-          orig_tab_order: col_tab_order
+          orig_tab_order: col_tab_order,
         })
       })
 
@@ -63,6 +64,11 @@ class Puzzle extends React.Component {
           this.setState({
             col_tab_order
           })
+          if (response1.length !== this.state.orig_tab_order.length) {
+            this.setState({
+              orig_tab_order: col_tab_order
+            })
+          }
         })
     }
     // Handling the puzzle tabbing.
@@ -123,6 +129,11 @@ class Puzzle extends React.Component {
         if (e.keyCode === 17) {
           this.setState({
             row_tab: !this.state.row_tab
+          })
+        }
+        if (e.shiftKey && e.keyCode == 9) {
+          this.setState({
+            col_tab_order: this.state.orig_tab_order
           })
         }
       }
