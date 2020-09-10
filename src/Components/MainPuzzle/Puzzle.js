@@ -68,6 +68,10 @@ class Puzzle extends React.Component {
             this.setState({
               orig_tab_order: col_tab_order
             })
+            for (let x = 0; x < Object.keys(this.refs).length; x++) {
+              const ref_name = `ref${x}`;
+              this.refs[ref_name].value = "";
+            }
           }
         })
     }
@@ -207,10 +211,9 @@ class Puzzle extends React.Component {
                 }
               </tr>
             ))}
-
           </tbody>
         </table>
-        <Clues clues={clues} />
+        <Clues clues={clues} x="1" y="1" />
       </div>
     );
   }
