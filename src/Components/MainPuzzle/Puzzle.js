@@ -13,7 +13,8 @@ class Puzzle extends React.Component {
       row_tab: true,
       col_tab_order: [],
       orig_tab_order: [],
-      size: 0
+      size: 0,
+      coords: [0, 0]
     }
     this.changeFocus = this.FocusNext.bind(this)
     this.get_col_tab = this.get_col_tab.bind(this)
@@ -38,6 +39,7 @@ class Puzzle extends React.Component {
           clues,
           col_tab_order,
           orig_tab_order: col_tab_order,
+          active_number: 0
         })
       })
 
@@ -82,6 +84,10 @@ class Puzzle extends React.Component {
 
       this.refs[ref_name].onfocus = (e) => {
         this.refs[ref_name].select();
+        let active_number = this.state.squares[x].number
+        this.setState({
+          active_number
+        })
       }
       this.refs[ref_name].onkeydown = (e) => {
         let col_tab_order = [...this.state.orig_tab_order]
@@ -193,7 +199,7 @@ class Puzzle extends React.Component {
   render() {
     const { squares, clues } = this.state;
     const size = Math.sqrt(squares.length);
-    const { row_tab, col_tab_order } = this.state
+    const { row_tab, col_tab_order, active_number } = this.state
     return (
       <div id="puzzle">
         <table>
@@ -213,7 +219,7 @@ class Puzzle extends React.Component {
             ))}
           </tbody>
         </table>
-        <Clues clues={clues} x="1" y="1" />
+        <Clues clues={clues} active_number={active_number} />
       </div>
     );
   }
