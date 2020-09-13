@@ -84,9 +84,10 @@ class Puzzle extends React.Component {
 
       this.refs[ref_name].onfocus = (e) => {
         this.refs[ref_name].select();
-        let active_number = this.state.squares[x].number
+        let active_row = this.state.squares[x].across_clue
+        let active_col = this.state.squares[x].down_clue
         this.setState({
-          active_number
+          coords: [active_row, active_col]
         })
       }
       this.refs[ref_name].onkeydown = (e) => {
@@ -199,7 +200,7 @@ class Puzzle extends React.Component {
   render() {
     const { squares, clues } = this.state;
     const size = Math.sqrt(squares.length);
-    const { row_tab, col_tab_order, active_number } = this.state
+    const { row_tab, col_tab_order, coords } = this.state
     return (
       <div id="puzzle">
         <table>
@@ -219,7 +220,7 @@ class Puzzle extends React.Component {
             ))}
           </tbody>
         </table>
-        <Clues clues={clues} active_number={active_number} />
+        <Clues clues={clues} coords={coords} />
       </div>
     );
   }
