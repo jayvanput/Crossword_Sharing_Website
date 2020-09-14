@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import './index.css';
 import Puzzle from './Components/MainPuzzle/Puzzle';
 import PuzzleItem from './Components/PuzzleLinks/PuzzleItem';
@@ -10,6 +10,7 @@ export default class App extends React.Component {
 
     this.state = {
       puzzles: [],
+      max_id: 0
     }
   }
   componentDidMount() {
@@ -20,13 +21,16 @@ export default class App extends React.Component {
       }
     })
       .then(response => response.json())
-      .then(response => this.setState({
-        puzzles: response.puzzles
-      }))
+      .then(response => (
+        this.setState({
+          puzzles: response.puzzles,
+          max_id: response.puzzles[response.puzzles.length - 1].ID
+        })
+      ))
   }
 
   render() {
-    const { puzzles } = this.state
+    const { puzzles, max_id } = this.state
     return (
       <div id="content">
         <header>
@@ -35,19 +39,23 @@ export default class App extends React.Component {
         <div></div>
         <div id="puzzle_master" >
           <Router>
-
             <div id="puzzle_links">
               <div className="container">
-                {puzzles.map((puzzle, index) =>
-                  <Link to={`/puz/${index + 1}`} key={index + 1}>
-                    <PuzzleItem puzzle={puzzle} key={index + 1} />
+                {puzzles.map((puzzle) =>
+                  <Link to={`/puz/${puzzle.ID}`} key={puzzle.ID}>
+                    <PuzzleItem puzzle={puzzle} key={puzzle.ID} />
                   </Link>)}
               </div>
             </div>
             <div id="puzzles">
-              <Route path={'/puz/:id'} render={({ match }) => (
-                <Puzzle id={match.params.id} />
-              )} />
+              <Switch>
+                <Route exact path={'/puz/:id'} render={({ match }) => (
+                  <Puzzle id={match.params.id} />
+                )} />
+                <Route exact path={'/'} render={() => (
+                  <Puzzle id={max_id} />
+                )} />
+              </Switch>
             </div>
             <aside>
               <h1>About Me:</h1>

@@ -22,6 +22,10 @@ td input{
   font-size: 1.4vw;
   text-transform:uppercase;
 }
-.black{
+.cell-black{
   background-color: black;
+}
+
+input.active {
+  background-color: lightblue;
 }

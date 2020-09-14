@@ -7,34 +7,33 @@ class Puzzle extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      puzzle: [],
       squares: [],
       clues: [],
       row_tab: true,
       col_tab_order: [],
       orig_tab_order: [],
       size: 0,
-      coords: [0, 0]
+      coords: [0, 0],
+      active_number: 0
     }
     this.changeFocus = this.FocusNext.bind(this)
     this.get_col_tab = this.get_col_tab.bind(this)
   }
+
   componentDidMount() {
     Promise.all([
-      fetch(`http://localhost:4000/puzzles/${this.props.id}/puzzle`),
       fetch(`http://localhost:4000/puzzles/${this.props.id}/squares`),
       fetch(`http://localhost:4000/puzzles/${this.props.id}/clues`)
     ])
-      .then(([response_puz, response_squares, response_clues]) =>
-        Promise.all([response_puz.json(), response_squares.json(), response_clues.json()])
+      .then(([response_squares, response_clues]) =>
+        Promise.all([response_squares.json(), response_clues.json()])
       )
-      .then(([puzzle, squares, clues]) => {
+      .then(([squares, clues]) => {
         let col_tab_order = [];
         for (let i = 0; i < squares.length; i++) {
           col_tab_order.push(squares[i].col_tab)
         }
         this.setState({
-          puzzle,
           squares,
           clues,
           col_tab_order,
@@ -97,44 +96,52 @@ class Puzzle extends React.Component {
           let col_tab = this.get_col_tab(x - 1)
           col_tab_order[x] = -1
           col_tab_order[x - 1] = col_tab
+          if (this.state.row_tab) {
+            this.FocusNext(e, this.refs[ref_name], x - 1, 1)
+          }
           this.setState({
             row_tab: true,
             col_tab_order
           })
-          this.FocusNext(e, this.refs[ref_name], x - 1, 1)
         }
         // Handle ArrowUp
         if (e.keyCode === 38) {
           let col_tab = this.get_col_tab(x - row_offset)
           col_tab_order[x] = -1
           col_tab_order[x - row_offset] = col_tab
+          if (!this.state.row_tab) {
+            this.FocusNext(e, this.refs[ref_name], x - row_offset, 1)
+          }
           this.setState({
             row_tab: false,
             col_tab_order
           })
-          this.FocusNext(e, this.refs[ref_name], x - row_offset, 1)
         }
         // Handle ArrowRight
         if (e.keyCode === 39) {
           let col_tab = this.get_col_tab(x + 1)
           col_tab_order[x] = -1
           col_tab_order[x + 1] = col_tab
+          if (this.state.row_tab) {
+            this.FocusNext(e, this.refs[ref_name], x + 1, 0)
+          }
           this.setState({
             row_tab: true,
             col_tab_order
           })
-          this.FocusNext(e, this.refs[ref_name], x + 1, 0)
         }
         // Handle ArrowDown
         if (e.keyCode === 40) {
           let col_tab = this.get_col_tab(x + row_offset)
           col_tab_order[x] = -1
           col_tab_order[x + row_offset] = col_tab
+          if (!this.state.row_tab) {
+            this.FocusNext(e, this.refs[ref_name], x + row_offset, 1)
+          }
           this.setState({
             row_tab: false,
             col_tab_order
           })
-          this.FocusNext(e, this.refs[ref_name], x + row_offset, 1)
         }
         // Handle ArrowDown
         if (e.keyCode === 17) {
@@ -142,6 +149,7 @@ class Puzzle extends React.Component {
             row_tab: !this.state.row_tab
           })
         }
+
         if (e.shiftKey && e.keyCode == 9) {
           this.setState({
             col_tab_order: this.state.orig_tab_order
@@ -155,7 +163,7 @@ class Puzzle extends React.Component {
           this.refs[ref_name].value = this.refs[ref_name].value[0]
           this.FocusNext(e, this.refs[ref_name], x + 1);
         } else {
-          if (this.refs[`ref${x + row_offset}`] && this.refs[`ref${x + row_offset}`].className == 'cell white') {
+          if (this.refs[`ref${x + row_offset}`] && this.refs[`ref${x + row_offset}`].classList.contains('cell-white')) {
             col_tab_order = [...this.state.orig_tab_order]
             let col_tab = this.get_col_tab(x + row_offset)
             col_tab_order[x] = -1
@@ -173,8 +181,9 @@ class Puzzle extends React.Component {
   FocusNext(e, field, x, dir_flag) {
     const ref_name = `ref${x}`
     if (this.refs[ref_name]
-      && this.refs[ref_name].className == 'cell white') {
+      && this.refs[ref_name].className == 'cell-white active') {
       this.refs[ref_name].focus()
+      this.refs[ref_name].select()
     } else {
       field.select()
     }
@@ -186,7 +195,7 @@ class Puzzle extends React.Component {
     let tab_order = 0;
     for (let i = x; i > 0; i -= size) {
       const ref_name = `ref${i - size}`
-      if (this.refs[ref_name] && this.refs[ref_name].className === "cell black") {
+      if (this.refs[ref_name] && this.refs[ref_name].classList.contains("cell-black")) {
         tab_order = i
         break
       }
@@ -213,14 +222,19 @@ class Puzzle extends React.Component {
                     square={square}
                     tab={row_tab}
                     col_tab_order={col_tab_order[index_row * size + index]}
-                    font_val={squares.length} />
+                    font_val={squares.length}
+                    x_active={coords[0] == squares[index_row * size + index].across_clue
+                      ? 'active' : 'inactive'}
+                    y_active={coords[1] == squares[index_row * size + index].down_clue
+                      ? 'active' : 'inactive'}
+                  />
                 ))
                 }
               </tr>
             ))}
           </tbody>
         </table>
-        <Clues clues={clues} coords={coords} />
+        <Clues clues={clues} coords={coords} row_tab={row_tab} />
       </div>
     );
   }
