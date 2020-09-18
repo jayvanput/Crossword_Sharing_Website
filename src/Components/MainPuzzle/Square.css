@@ -1,13 +1,8 @@
 
 td {
   text-align: center;
-  font-size:2vw;
   border: 1px solid black;
-  content: none;
-  width: 20%;
-  cursor: ;
   padding:0;
-  position: relative;
 }
 td span{
   position: absolute;
@@ -17,9 +12,7 @@ td input{
   width: 100%;
   height: 100%;
   border:none;
-
   text-align: center;
-  font-size: 1.4vw;
   text-transform:uppercase;
 }
 .cell-black{

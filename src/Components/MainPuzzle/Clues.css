@@ -1,11 +1,12 @@
 .clueList{
   display:grid;
-  grid-template-rows: 1fr 1fr;
-  width: 15vw;
+  grid-template-columns: 1fr 1fr;
+  height:30vw;
+  width:50%;
 }
 
 .clueList > div {
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .active {

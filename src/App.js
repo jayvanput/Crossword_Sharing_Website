@@ -39,14 +39,10 @@ export default class App extends React.Component {
         <div></div>
         <div id="puzzle_master" >
           <Router>
-            <div id="puzzle_links">
-              <div className="container">
-                {puzzles.map((puzzle) =>
-                  <Link to={`/puz/${puzzle.ID}`} key={puzzle.ID}>
-                    <PuzzleItem puzzle={puzzle} key={puzzle.ID} />
-                  </Link>)}
-              </div>
-            </div>
+            <aside>
+              <h1>About Me:</h1>
+              <p>My name is Jay VanPut.</p>
+            </aside>
             <div id="puzzles">
               <Switch>
                 <Route exact path={'/puz/:id'} render={({ match }) => (
@@ -57,10 +53,14 @@ export default class App extends React.Component {
                 )} />
               </Switch>
             </div>
-            <aside>
-              <h1>About Me:</h1>
-              <p>My name is Jay VanPut.</p>
-            </aside>
+            <div id="puzzle_links">
+              <div className="container">
+                {puzzles.map((puzzle) =>
+                  <Link to={`/puz/${puzzle.ID}`} key={puzzle.ID}>
+                    <PuzzleItem puzzle={puzzle} key={puzzle.ID} />
+                  </Link>)}
+              </div>
+            </div>
           </Router>
         </div>
       </div >

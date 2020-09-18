@@ -33,7 +33,7 @@ aside {
     display: none;
 }
 
-@media (min-device-width:480px) {
+@media (min-width:1200px) {
     #puzzle_master {
         display:grid;
         grid-template-columns: 1fr 2fr 1fr;

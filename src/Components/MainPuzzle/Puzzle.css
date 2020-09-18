@@ -1,6 +1,7 @@
 #puzzle {
   display:flex;
   justify-content: space-evenly;
+  padding:1vw;
 }
 
 #puzzle > div {
