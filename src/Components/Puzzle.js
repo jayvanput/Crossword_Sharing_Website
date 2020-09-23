@@ -2,6 +2,7 @@ import React from 'react';
 import './Puzzle.css'
 import Square from './Square'
 import Clues from './Clues'
+import PuzzleList from './PuzzleList';
 
 class Puzzle extends React.Component {
   constructor(props) {
@@ -244,6 +245,7 @@ class Puzzle extends React.Component {
           </tbody>
         </table>
         <Clues clues={clues} coords={coords} row_tab={row_tab} />
+        <PuzzleList puzzles={this.props.puzzles}/>
       </div>
     );
   }

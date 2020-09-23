@@ -2,7 +2,6 @@
   display:grid;
   grid-template-columns: 1fr 1fr;
   height:30vw;
-  width:50%;
 }
 
 .clueList > div {
@@ -11,4 +10,10 @@
 
 .active {
   background-color: lightblue;
+}
+
+@media (min-width:1200px) {
+  .clueList{
+    width:50%;
+  }
 }
