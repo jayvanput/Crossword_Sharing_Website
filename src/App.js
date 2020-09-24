@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Puzzle from './Components/Puzzle';
 import PuzzleList from './Components/PuzzleList';
-import Home from './Components/Home';
+import Home from './Components/Home/Home.js';
 import Header from './Components/Header';
 import Archive from './Components/Archive';
 
@@ -35,27 +35,16 @@ export default class App extends React.Component {
     const { puzzles } = this.state
     return (
       <Router>
-      <div id="content">
-        <Header />
-        <Route exact path={'/'} component={Home}/>
-        <Route exact path={'/archive'} component={Archive}/>
-        {/* <div id="puzzle_master" >
-            <aside>
-              <h1>About Me:</h1>
-              <p>My name is Jay VanPut.</p>
-            </aside>
-            <div id="puzzles">
-              <Switch>
-                <Route exact path={'/puz/:id'} render={({ match }) => (
-                  <Puzzle id={match.params.id} puzzles={puzzles}/>
-                )} />
-                <Route exact path={'/'} render={() => (
-                  <PuzzleList puzzles={puzzles}/>
-                )} />
-              </Switch>
-            </div>
-        </div> */}
-      </div >
+        <div id="content">
+          <Header />
+          <Route exact path={'/'} component={Home} />
+          <Route exact path={'/archive'} component={Archive} />
+          <Switch>
+            <Route exact path={'/puz/:id'} render={({ match }) => (
+              <Puzzle id={match.params.id} puzzles={puzzles} />
+            )} />
+          </Switch>
+        </div >
       </Router>
     )
   }

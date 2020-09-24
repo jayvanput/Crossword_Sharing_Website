@@ -1,0 +1,15 @@
+#new_puz {
+  margin: 3vw auto;
+  box-sizing: border-box;
+  width:30vw;
+  height:20vw;
+  border: 2px solid gray;
+  border-radius: 5%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#new_puz:hover {
+  background-color: lightgray;
+}
