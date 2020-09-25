@@ -245,7 +245,6 @@ class Puzzle extends React.Component {
           </tbody>
         </table>
         <Clues clues={clues} coords={coords} row_tab={row_tab} />
-        <PuzzleList puzzles={this.props.puzzles}/>
       </div>
     );
   }

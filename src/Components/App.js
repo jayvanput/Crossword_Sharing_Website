@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Puzzle from './Components/Puzzle';
-import PuzzleList from './Components/PuzzleList';
-import Home from './Components/Home/Home.js';
-import Header from './Components/Header';
-import Archive from './Components/Archive';
+import Puzzle from './Puzzle';
+import Home from './Home/Home.js';
+import Header from './Header';
+import Archive from './Archive';
+import './App.css'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -35,8 +35,8 @@ export default class App extends React.Component {
     const { puzzles } = this.state
     return (
       <Router>
+        <Header />
         <div id="content">
-          <Header />
           <Route exact path={'/'} component={Home} />
           <Route exact path={'/archive'} component={Archive} />
           <Switch>

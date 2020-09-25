@@ -22,8 +22,7 @@ button {
 }
 
 button:hover {
-  background-color: lightgray;
-  
+  background-color: hsl(91, 35%, 69%);;
 }
 
 a {

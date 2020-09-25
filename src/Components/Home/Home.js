@@ -4,7 +4,7 @@ import './Home.css'
 
 export default function Home() {
   return (
-    <div>
+    <div id="homepage">
       <LatestPuzzle />
     </div>
   )

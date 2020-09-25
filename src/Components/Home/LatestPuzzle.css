@@ -8,6 +8,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background-color: white;
 }
 
 #new_puz:hover {

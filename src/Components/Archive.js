@@ -1,5 +1,7 @@
 import React from 'react';
-
-export default function Home() {
-  return <div>bye</div>
+import ArchiveMenu from './ArchiveMenu'
+export default function Archive() {
+  return (
+    <ArchiveMenu />
+  )
 }
