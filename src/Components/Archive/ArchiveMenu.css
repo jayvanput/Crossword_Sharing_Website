@@ -1,0 +1,11 @@
+#new_puz1 {
+  margin: 3vw auto;
+  box-sizing: border-box;
+  width:70vh;
+  height:40vh;
+  border: 2px solid gray;
+  border-radius: 5%;
+  display: grid;
+  grid-template-rows: 1fr 5fr;
+  background-color: white;
+}

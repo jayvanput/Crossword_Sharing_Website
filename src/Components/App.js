@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Puzzle from './Puzzle';
 import Home from './Home/Home.js';
 import Header from './Header';
-import Archive from './Archive';
+import Archive from './Archive/Archive';
 import './App.css'
 
 export default class App extends React.Component {
@@ -35,17 +35,20 @@ export default class App extends React.Component {
     const { puzzles } = this.state
     return (
       <Router>
-        <Header />
-        <div id="content">
-          <Route exact path={'/'} component={Home} />
-          <Route exact path={'/archive'} component={Archive} />
-          <Switch>
-            <Route exact path={'/puz/:id'} render={({ match }) => (
-              <Puzzle id={match.params.id} puzzles={puzzles} />
-            )} />
-          </Switch>
-        </div >
+        <div className="container">
+          <Header />
+          <div id="content">
+            <Route exact path={'/'} component={Home} />
+            <Route exact path={'/archive'} component={Archive} />
+            <Switch>
+              <Route exact path={'/puz/:id'} render={({ match }) => (
+                <Puzzle id={match.params.id} puzzles={puzzles} />
+              )} />
+            </Switch>
+          </div >
+        </div>
       </Router>
+
     )
   }
 }

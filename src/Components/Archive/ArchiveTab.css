@@ -1,0 +1,18 @@
+.tab {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  margin-top: 1vh;
+  border-top: 1px solid gray;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.tab span {
+  position: absolute;
+  font-size: 1.5vw;
+  bottom: 0;
+}

@@ -4,8 +4,13 @@ import './Home.css'
 
 export default function Home() {
   return (
-    <div id="homepage">
-      <LatestPuzzle />
+    <div className="row">
+      <div className="col">
+        <div id="homepage">
+          <LatestPuzzle />
+        </div>
+      </div>
     </div>
+
   )
 }
