@@ -1,11 +1,23 @@
 import React from 'react';
 import './PuzzleInfo.css'
-export default function PuzzleInfo() {
+export default function PuzzleInfo(props) {
   return (
     <div id="metadata">
-      <div className="data" id="name">Do you remember?</div>
-      <div className="data" id="size">15 x 15</div>
-      <div className="data" id="Date">9/22/2020</div>
+      <div className="row">
+        <div className="col data" id="name">{props.puzzle.title}</div>
+      </div>
+      <div className="row">
+        <span className="col data">-----</span>
+      </div>
+      <div className="row">
+        <div className="col data" id="size">{props.puzzle.width} x {props.puzzle.height}</div>
+      </div>
+      <div className="row">
+        <span className="col data">-----</span>
+      </div>
+      <div className="row">
+        <div className="col data" id="Date">{props.puzzle.date_created}</div>
+      </div>
     </div>
   )
 }

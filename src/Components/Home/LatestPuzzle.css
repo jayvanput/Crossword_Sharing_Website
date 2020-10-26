@@ -8,9 +8,13 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: white;
+  background-color: lightgray;
 }
 
-#new_puz:hover {
-  background-color: lightgray;
+.active {
+  background-color: transparent;
+}
+
+.carousel-control-prev-ci {
+  color: black
 }

@@ -1,15 +1,56 @@
 import React from 'react';
 import PuzzlePicture from './PuzzlePicture'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import PuzzleInfo from './PuzzleInfo'
+import Carousel from 'react-bootstrap/Carousel'
 import './LatestPuzzle.css'
-export default function Home() {
+
+export default function LatestPuzzle(props) {
   return (
-    <Link to={`/puz/1`}>
-      <div id="new_puz">
-        <PuzzlePicture />
-        <PuzzleInfo />
-      </div>
-    </Link>
+    <Carousel interval={null} slide={true}>
+      <Carousel.Item className="carousel-inner">
+        <Link to={`/puz/` + props.puzzles[0].ID}>
+          <div id="new_puz">
+            <div className="row d-flex flex-wrap align-items-center">
+              <div className="col">
+                <PuzzlePicture />
+              </div>
+              <div className="col">
+                {props.puzzles && <PuzzleInfo puzzle={props.puzzles[2]} />}
+              </div>
+            </div>
+          </div>
+        </Link>
+      </Carousel.Item>
+      <Carousel.Item className="carousel-inner">
+        <Link to={`/puz/` + props.puzzles[1].ID}>
+          <div id="new_puz">
+            <div className="row d-flex flex-wrap align-items-center">
+              <div className="col">
+                <PuzzlePicture />
+              </div>
+              <div className="col">
+                {props.puzzles && <PuzzleInfo puzzle={props.puzzles[1]} />}
+              </div>
+            </div>
+          </div>
+        </Link>
+      </Carousel.Item>
+      <Carousel.Item className="carousel-inner">
+        <Link to={`/puz/` + props.puzzles[2].ID}>
+          <div id="new_puz">
+            <div className="row d-flex flex-wrap align-items-center">
+              <div className="col">
+                <PuzzlePicture />
+              </div>
+              <div className="col">
+                {props.puzzles && <PuzzleInfo puzzle={props.puzzles[0]} />}
+              </div>
+            </div>
+          </div>
+        </Link>
+      </Carousel.Item>
+    </Carousel>
+
   )
 }

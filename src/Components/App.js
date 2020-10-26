@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Puzzle from './Puzzle';
+import Puzzle from './Puzzle/Puzzle';
 import Home from './Home/Home.js';
 import Header from './Header';
 import Archive from './Archive/Archive';
@@ -26,19 +26,21 @@ export default class App extends React.Component {
       .then(response => (
         this.setState({
           puzzles: response.puzzles,
-          max_id: response.puzzles[response.puzzles.length - 1].ID
+          newest_puzzles: response.puzzles.slice(response.puzzles.length - 4, response.puzzles.length - 1)
         })
       ))
   }
 
   render() {
-    const { puzzles } = this.state
+    const { puzzles, newest_puzzles } = this.state
+    console.log(puzzles)
+    console.log(newest_puzzles)
     return (
       <Router>
         <div className="container">
           <Header />
           <div id="content">
-            <Route exact path={'/'} component={Home} />
+            <Route exact path={'/'} component={() => <Home puzzles={newest_puzzles} />} />
             <Route exact path={'/archive'} component={Archive} />
             <Switch>
               <Route exact path={'/puz/:id'} render={({ match }) => (

@@ -152,7 +152,7 @@ class Puzzle extends React.Component {
           })
         }
 
-        if (e.shiftKey && e.keyCode == 9) {
+        if (e.shiftKey && e.keyCode === 9) {
           this.setState({
             col_tab_order: this.state.orig_tab_order
           })
@@ -183,7 +183,7 @@ class Puzzle extends React.Component {
   FocusType(e, field, x) {
     const ref_name = `ref${x}`
     if (this.refs[ref_name]
-      && this.refs[ref_name].className == 'cell-white active') {
+      && this.refs[ref_name].className === 'cell-white active') {
       this.refs[ref_name].focus()
       this.refs[ref_name].select()
     } else {
@@ -233,9 +233,9 @@ class Puzzle extends React.Component {
                     tab={row_tab}
                     col_tab_order={col_tab_order[index_row * size + index]}
                     font_val={squares.length}
-                    x_active={coords[0] == squares[index_row * size + index].across_clue
+                    x_active={coords[0] === squares[index_row * size + index].across_clue
                       ? 'active' : 'inactive'}
-                    y_active={coords[1] == squares[index_row * size + index].down_clue
+                    y_active={coords[1] === squares[index_row * size + index].down_clue
                       ? 'active' : 'inactive'}
                   />
                 ))
