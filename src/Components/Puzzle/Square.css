@@ -16,9 +16,14 @@ td input{
   text-align: center;
   text-transform:uppercase;
 }
+
+.blue {
+  background-color: lightblue;
+}
 .cell-black{
   background-color: black;
 }
+
 
 input.active {
   background-color: lightblue;

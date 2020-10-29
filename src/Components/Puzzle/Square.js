@@ -1,15 +1,29 @@
+import { render } from '@testing-library/react';
 import React from 'react';
 import './Square.css'
-const Square = React.forwardRef((props, ref) => (
-  <td>
-    <span style={{'fontSize': (150 / (.26*(props.font_val)))+9}}>{props.square.number}</span>
-    <input ref={ref}
-      className={props.square.black === 1 ? "cell-black" : props.tab ? `cell-white ${props.x_active}` : `cell-white ${props.y_active}`}
-      tabIndex={props.tab ? props.square.row_tab : props.col_tab_order}
-      style={{'fontSize': (200 / (.26*(props.font_val)))+20}}
-    ></input>
-  </td >
-));
+class Square extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleFocus = this.handleFocus.bind(this);
+  }
 
+  handleFocus() {
+    this.props.onFocus(this.props.square.next_tab)
+  }
+
+  render() {
+    let cell_col = this.props.square.black === 1 ? "cell-black" : 'cell-white'
+    let active_word = this.props.next_tab === this.props.square.next_tab ? "blue" : 'test'
+    return (
+      <td className={cell_col + " " + active_word}>
+        <span>{this.props.square.number}</span>
+        <input
+          tabIndex={this.props.next_tab == this.props.id ? 0 : -1}
+          onFocus={this.handleFocus}></input>
+      </td >
+    )
+  }
+
+};
 
 export default Square;

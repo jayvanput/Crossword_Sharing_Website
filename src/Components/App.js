@@ -26,7 +26,7 @@ export default class App extends React.Component {
       .then(response => (
         this.setState({
           puzzles: response.puzzles,
-          newest_puzzles: response.puzzles.slice(response.puzzles.length - 4, response.puzzles.length - 1)
+          newest_puzzles: response.puzzles
         })
       ))
   }
@@ -44,7 +44,7 @@ export default class App extends React.Component {
             <Route exact path={'/archive'} component={Archive} />
             <Switch>
               <Route exact path={'/puz/:id'} render={({ match }) => (
-                <Puzzle id={match.params.id} puzzles={puzzles} />
+                <Puzzle id={match.params.id} />
               )} />
             </Switch>
           </div >

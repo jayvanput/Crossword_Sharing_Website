@@ -16,40 +16,13 @@ export default function LatestPuzzle(props) {
                 <PuzzlePicture />
               </div>
               <div className="col">
-                {props.puzzles && <PuzzleInfo puzzle={props.puzzles[2]} />}
-              </div>
-            </div>
-          </div>
-        </Link>
-      </Carousel.Item>
-      <Carousel.Item className="carousel-inner">
-        <Link to={`/puz/` + props.puzzles[1].ID}>
-          <div id="new_puz">
-            <div className="row d-flex flex-wrap align-items-center">
-              <div className="col">
-                <PuzzlePicture />
-              </div>
-              <div className="col">
-                {props.puzzles && <PuzzleInfo puzzle={props.puzzles[1]} />}
-              </div>
-            </div>
-          </div>
-        </Link>
-      </Carousel.Item>
-      <Carousel.Item className="carousel-inner">
-        <Link to={`/puz/` + props.puzzles[2].ID}>
-          <div id="new_puz">
-            <div className="row d-flex flex-wrap align-items-center">
-              <div className="col">
-                <PuzzlePicture />
-              </div>
-              <div className="col">
                 {props.puzzles && <PuzzleInfo puzzle={props.puzzles[0]} />}
               </div>
             </div>
           </div>
         </Link>
       </Carousel.Item>
+
     </Carousel>
 
   )
