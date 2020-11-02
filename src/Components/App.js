@@ -33,8 +33,6 @@ export default class App extends React.Component {
 
   render() {
     const { puzzles, newest_puzzles } = this.state
-    console.log(puzzles)
-    console.log(newest_puzzles)
     return (
       <Router>
         <div className="container">
@@ -50,7 +48,6 @@ export default class App extends React.Component {
           </div >
         </div>
       </Router>
-
     )
   }
 }

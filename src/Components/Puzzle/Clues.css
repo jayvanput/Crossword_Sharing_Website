@@ -1,10 +1,14 @@
 .clueList{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
   height:30vw;
+  background-color: white;
 }
 
-.clueList > div {
+ul {
+  list-style-type: none;
+}
+
+.across, .down  {
+  height: 30vw;
   overflow-y: scroll;
 }
 

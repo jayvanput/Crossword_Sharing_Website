@@ -6,6 +6,7 @@ td {
 }
 td span{
   position: absolute;
+  font-size: xx-small;
 }  
 
 td input{
@@ -15,6 +16,7 @@ td input{
   background-color: transparent;
   text-align: center;
   text-transform:uppercase;
+  font-size: xx-small;
 }
 
 .blue {
@@ -24,11 +26,6 @@ td input{
   background-color: black;
 }
 
-
 input.active {
   background-color: lightblue;
-}
-
-@media (min-width:1200px) {
-
 }

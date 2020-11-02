@@ -9,51 +9,74 @@ class Puzzle extends React.Component {
     super(props)
     this.state = {
       squares: [],
-      next_tab: 0
+      clues: [],
+      next_tab: 0,
+      across_dir_flag: 1,
+      active_clue: 1
     }
-    this.UpdateTab = this.UpdateTab.bind(this)
+    this.updateTab = this.updateTab.bind(this)
+    this.handleDirChange = this.handleDirChange.bind(this)
   }
 
   componentDidMount() {
-    fetch(`http://localhost:4000/puzzles/${this.props.id}/squares`)
-      .then(response_squares =>
-        response_squares.json()
+    Promise.all([
+      fetch(`http://localhost:4000/puzzles/${this.props.id}/squares`),
+      fetch(`http://localhost:4000/puzzles/${this.props.id}/clues`)
+    ])
+      .then(([response_squares, response_clues]) =>
+        Promise.all([response_squares.json(), response_clues.json()])
       )
       .then(
-        squares => {
+        ([squares, clues]) => {
           this.setState({
-            squares
+            squares,
+            clues
           })
         }
       )
   }
 
-  UpdateTab(next_tab) {
+  updateTab(next_tab, active_clue) {
     this.setState({
-      next_tab
+      next_tab,
+      active_clue
     })
-
   }
+
+  handleDirChange(dir_tag) {
+    this.setState({
+      across_dir_flag: dir_tag,
+    })
+  }
+
   render() {
-    let { squares, next_tab } = this.state;
+    let { squares, next_tab, across_dir_flag, clues, active_clue } = this.state;
     let size = Math.sqrt(squares.length)
     return (
-      <table>
-        <tbody>
-          {[...Array(size)].map((row, index_row) => (
-            <tr key={index_row}>
-              {squares.slice(index_row * size, (index_row + 1) * size).map((square, index) => (
-                <Square
-                  onFocus={this.UpdateTab}
-                  next_tab={next_tab}
-                  key={(index_row) * size + index}
-                  id={(index_row) * size + index}
-                  square={square} />
+      <div className="row">
+        <div className="col">
+          <table>
+            <tbody>
+              {[...Array(size)].map((row, index_row) => (
+                <tr key={index_row}>
+                  {squares.slice(index_row * size, (index_row + 1) * size).map((square, index) => (
+                    <Square
+                      onSelect={this.updateTab}
+                      onDirChange={this.handleDirChange}
+                      key={(index_row) * size + index}
+                      id={(index_row) * size + index}
+                      size={size}
+                      next_tab={next_tab}
+                      square={square}
+                      across_dir_flag={across_dir_flag} />
+                  ))}
+                </tr>
               ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            </tbody>
+          </table>
+        </div>
+        <Clues clues={clues} active_clue={active_clue} across_dir_flag={across_dir_flag} />
+      </div>
     )
   }
 }
