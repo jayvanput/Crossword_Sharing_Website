@@ -10,11 +10,11 @@ class Puzzle extends React.Component {
     this.state = {
       squares: [],
       clues: [],
-      next_tab: 0,
+      next_tab: 5,
       across_dir_flag: 1,
       active_clue: 1
     }
-    this.updateTab = this.updateTab.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
     this.handleDirChange = this.handleDirChange.bind(this)
   }
 
@@ -36,11 +36,18 @@ class Puzzle extends React.Component {
       )
   }
 
-  updateTab(next_tab, active_clue) {
+  handleSelect(next_tab, active_clue) {
     this.setState({
       next_tab,
       active_clue
     })
+    if (active_clue) {
+      if (this.state.across_dir_flag) {
+        document.getElementById("a" + active_clue).scrollIntoView()
+      } else {
+        document.getElementById("d" + active_clue).scrollIntoView()
+      }
+    }
   }
 
   handleDirChange(dir_tag) {
@@ -61,7 +68,7 @@ class Puzzle extends React.Component {
                 <tr key={index_row}>
                   {squares.slice(index_row * size, (index_row + 1) * size).map((square, index) => (
                     <Square
-                      onSelect={this.updateTab}
+                      onSelect={this.handleSelect}
                       onDirChange={this.handleDirChange}
                       key={(index_row) * size + index}
                       id={(index_row) * size + index}

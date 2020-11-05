@@ -31,9 +31,9 @@ class Square extends React.Component {
 
   handleSelect() {
     if (this.props.across_dir_flag) {
-      this.props.onSelect(this.props.square.next_tab, this.props.square.number)
+      this.props.onSelect(this.props.square.next_tab, this.props.square.across_clue)
     } else {
-      this.props.onSelect(this.props.square.next_tab_down, this.props.square.number)
+      this.props.onSelect(this.props.square.next_tab_down, this.props.square.down_clue)
     }
   }
 
@@ -100,7 +100,7 @@ class Square extends React.Component {
           onKeyDown={this.handleKeyDown}
           onKeyPress={this.handleKeyPress}
           data-black={this.props.square.black}
-          disabled={cell_color == "cell-black" ? true : false}
+          maxLength={cell_color == "cell-black" ? 0 : 1}
         ></input>
       </td >
     )

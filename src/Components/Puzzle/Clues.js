@@ -3,6 +3,8 @@ import './Clues.css'
 import Clue from './Clue'
 class Clues extends React.Component {
 
+
+
   render() {
     const { clues, coords, row_tab } = this.props
     return (
@@ -12,7 +14,13 @@ class Clues extends React.Component {
             <ul>
               {clues.map((clue, index) => {
                 if (clue.direction === 0) {
-                  return <Clue clue={clue} key={"a" + index} active_clue={this.props.active_clue} row={1} across_dir_flag={this.props.across_dir_flag} />
+                  return <Clue
+                    clue={clue}
+                    key={index}
+                    active_clue={this.props.active_clue}
+                    row={1}
+                    across_dir_flag={this.props.across_dir_flag}
+                  />
                 }
               })}
             </ul>
