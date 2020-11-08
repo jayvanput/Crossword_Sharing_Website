@@ -16,7 +16,8 @@ td input{
   background-color: transparent;
   text-align: center;
   text-transform:uppercase;
-  font-size: xx-small;
+  font-size: large;
+  font-weight: 475;
 }
 
 .blue {
