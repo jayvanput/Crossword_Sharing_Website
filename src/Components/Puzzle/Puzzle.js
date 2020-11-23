@@ -19,20 +19,15 @@ class Puzzle extends React.Component {
   }
 
   componentDidMount() {
-    Promise.all([
-      fetch(`http://localhost:4000/puzzles/${this.props.id}/squares`),
-      fetch(`http://localhost:4000/puzzles/${this.props.id}/clues`)
-    ])
-      .then(([response_squares, response_clues]) =>
-        Promise.all([response_squares.json(), response_clues.json()])
-      )
+    fetch(`http://localhost:4000/puzzles/`)
+      .then(response_squares => response_squares.json())
       .then(
-        ([squares, clues]) => {
+        puzzle => {
           this.setState({
-            squares,
-            clues
+            squares: puzzle.squares,
+            clues: puzzle.clues
           })
-        }
+        },
       )
   }
 

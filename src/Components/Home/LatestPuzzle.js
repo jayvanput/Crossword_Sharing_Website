@@ -9,14 +9,14 @@ export default function LatestPuzzle(props) {
   return (
     <Carousel interval={null} slide={true}>
       <Carousel.Item className="carousel-inner">
-        <Link to={`/puz/` + props.puzzles[0].ID}>
+        <Link to={`/puz/1`}>
           <div id="new_puz">
             <div className="row d-flex flex-wrap align-items-center">
               <div className="col">
                 <PuzzlePicture />
               </div>
               <div className="col">
-                {props.puzzles && <PuzzleInfo puzzle={props.puzzles[0]} />}
+                {props.puzzles && <PuzzleInfo puzzle={props.puzzles} />}
               </div>
             </div>
           </div>

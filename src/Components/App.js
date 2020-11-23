@@ -25,20 +25,19 @@ export default class App extends React.Component {
       .then(response => response.json())
       .then(response => (
         this.setState({
-          puzzles: response.puzzles,
-          newest_puzzles: response.puzzles
+          newest_puzzle: response
         })
       ))
   }
 
   render() {
-    const { puzzles, newest_puzzles } = this.state
+    const { newest_puzzle } = this.state
     return (
       <Router>
         <div className="container">
           <Header />
           <div id="content">
-            <Route exact path={'/'} component={() => <Home puzzles={newest_puzzles} />} />
+            <Route exact path={'/'} component={() => <Home puzzles={newest_puzzle} />} />
             <Route exact path={'/archive'} component={Archive} />
             <Switch>
               <Route exact path={'/puz/:id'} render={({ match }) => (

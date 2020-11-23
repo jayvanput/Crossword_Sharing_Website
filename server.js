@@ -3,23 +3,36 @@ const app = express();
 const morgan = require('morgan');
 var cors = require('cors');
 const db = require("./database.js")
+const mongoose = require('mongoose')
+require('dotenv').config();
 
 // Routes and middleware
+let Crossword = require('./models/crossword.model');
 app.use(morgan('tiny'));
 app.use(cors());
 app.use('/', express.static('build'));
 
+// Connect to mongodb
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true })
+
+const connection = mongoose.connection;
+connection.once('open', () => {
+  console.log("MongoDB db connection established successfully")
+})
+
+// Routing
+app.get('/test/', (req, res, next) => {
+  Crossword.findOne()
+    .then(crossword => res.json(crossword))
+    .then(err => res.status(400).json('Error: ' + err));
+})
+
+
 app.get('/puzzles/', (req, res, next) => {
-  let puzzles = [];
-  db.serialize(() => {
-    db.each('SELECT * FROM puzzle;', (error, row) => {
-      puzzles.push(row)
-    }, function () {
-      res.json({
-        "puzzles": puzzles,
-      })
-    })
-  })
+  Crossword.findOne()
+    .then(crossword => res.json(crossword))
+    .then(err => res.status(400).json('Error: ' + err));
 })
 
 app.get('/puzzles/:id/puzzle', (req, res, next) => {
@@ -40,14 +53,6 @@ app.get('/puzzles/:id/squares', (req, res, next) => {
   })
 })
 
-app.get('/puzzles/:id/clues', (req, res, next) => {
-  let clues = [];
-  db.each(`SELECT * FROM clue WHERE puzzleID = ${req.params.id};`, (error, row) => {
-    clues.push(row);
-  }, function () {
-    res.json(clues)
-  })
-})
 app.use('*', express.static('build'));
 
 app.listen(4000, () => {
