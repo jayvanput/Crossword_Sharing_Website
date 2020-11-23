@@ -22,35 +22,10 @@ connection.once('open', () => {
 })
 
 // Routing
-app.get('/test/', (req, res, next) => {
+app.get('/puzzles/*', (req, res, next) => {
   Crossword.findOne()
     .then(crossword => res.json(crossword))
     .then(err => res.status(400).json('Error: ' + err));
-})
-
-
-app.get('/puzzles/', (req, res, next) => {
-  Crossword.findOne()
-    .then(crossword => res.json(crossword))
-    .then(err => res.status(400).json('Error: ' + err));
-})
-
-app.get('/puzzles/:id/puzzle', (req, res, next) => {
-  let puzzle = [];
-  db.each(`SELECT * FROM puzzle WHERE ID = ${req.params.id};`, (error, row) => {
-    puzzle.push(row);
-  }, function () {
-    res.json(puzzle)
-  })
-})
-
-app.get('/puzzles/:id/squares', (req, res, next) => {
-  let squares = [];
-  db.each(`SELECT * FROM square WHERE puzzleID = ${req.params.id};`, (error, row) => {
-    squares.push(row);
-  }, function () {
-    res.json(squares)
-  })
 })
 
 app.use('*', express.static('build'));
