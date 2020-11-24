@@ -10,6 +10,7 @@ require('dotenv').config();
 let Crossword = require('./models/crossword.model');
 app.use(morgan('tiny'));
 app.use(cors());
+app.use('/', express.static('build'));
 
 // Connect to mongodb
 const uri = process.env.ATLAS_URI;
@@ -21,13 +22,11 @@ connection.once('open', () => {
 })
 
 // Routing
-app.get('/puzzles/*', (req, res, next) => {
+app.get('/puzzles/', (req, res, next) => {
   Crossword.findOne()
     .then(crossword => res.json(crossword))
     .catch(err => res.status(400).json('Error: ' + err));
 })
-
-app.use('/*', express.static('build'));
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
