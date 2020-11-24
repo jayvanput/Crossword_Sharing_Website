@@ -30,6 +30,7 @@ app.get('/puzzles/*', (req, res, next) => {
 
 app.use('*', express.static('build'));
 
-app.listen(4000, () => {
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
   console.log('doing the big boy things on port 4000!')
 })
