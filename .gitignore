@@ -13,6 +13,7 @@
 TODO
 
 # misc
+.env
 db.sqbpro
 .DS_Store
 .env.local
