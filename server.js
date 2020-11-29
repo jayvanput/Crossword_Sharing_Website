@@ -22,7 +22,7 @@ connection.once('open', () => {
 })
 
 // Routing
-app.get('/puzzles/', (req, res, next) => {
+app.get('/puzzles', (req, res, next) => {
   Crossword.findOne()
     .then(crossword => res.json(crossword))
     .catch(err => res.status(400).json('Error: ' + err));
