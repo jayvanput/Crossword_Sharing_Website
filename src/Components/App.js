@@ -16,7 +16,7 @@ export default class App extends React.Component {
     }
   }
   componentDidMount() {
-    fetch(`./puzzles`, {
+    fetch(`http://localhost:4000/puzzles/`, {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
