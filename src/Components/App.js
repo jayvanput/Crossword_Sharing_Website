@@ -16,12 +16,7 @@ export default class App extends React.Component {
     }
   }
   componentDidMount() {
-    fetch(`/puzzles`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
+    fetch(`/puzzles`)
       .then(response => response.json())
       .then(response => (
         this.setState({

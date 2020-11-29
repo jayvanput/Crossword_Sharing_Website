@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 var cors = require('cors');
-const db = require("./database.js")
 const mongoose = require('mongoose')
 require('dotenv').config();
 
