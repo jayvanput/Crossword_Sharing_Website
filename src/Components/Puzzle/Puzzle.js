@@ -19,7 +19,7 @@ class Puzzle extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:4000/puzzles/`)
+    fetch(`/puzzles`)
       .then(response_squares => response_squares.json())
       .then(
         puzzle => {
