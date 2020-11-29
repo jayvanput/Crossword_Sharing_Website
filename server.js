@@ -9,11 +9,10 @@ require('dotenv').config();
 let Crossword = require('./models/crossword.model');
 app.use(morgan('tiny'));
 app.use(cors());
-app.use('/', express.static('build'));
 
 // Connect to mongodb
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true })
+mongoose.connect(porocess.env.MONGODB_URI || uri, { useNewUrlParser: true, useCreateIndex: true })
 
 const connection = mongoose.connection;
 connection.once('open', () => {
@@ -28,6 +27,10 @@ app.get('/puzzles', (req, res, next) => {
 })
 
 const PORT = process.env.PORT || 4000;
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('build'));
+}
 app.listen(PORT, () => {
   console.log(`doing the big boy things on port ${PORT}!`)
 })
